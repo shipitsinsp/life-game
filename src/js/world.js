@@ -28,24 +28,24 @@ export class World {
         for (let col = 0; col < this.width; col++) {
             let column = []
             for (let row = 0; row < this.height; row++) {
-                let neighboors = 0
-                neighboors += this.#cells[(col + this.width - 1) % this.width][(row + this.height - 1) % this.height]
-                neighboors += this.#cells[(col + this.width) % this.width][(row + this.height - 1) % this.height]
-                neighboors += this.#cells[(col + this.width + 1) % this.width][(row + this.height - 1) % this.height]
-                neighboors += this.#cells[(col + this.width - 1) % this.width][(row + this.height) % this.height]
-                neighboors += this.#cells[(col + this.width + 1) % this.width][(row + this.height) % this.height]
-                neighboors += this.#cells[(col + this.width - 1) % this.width][(row + this.height + 1) % this.height]
-                neighboors += this.#cells[(col + this.width) % this.width][(row + this.height + 1) % this.height]
-                neighboors += this.#cells[(col + this.width + 1) % this.width][(row + this.height + 1) % this.height]
+                let neighbors = 0
+                neighbors += this.#cells[(col + this.width - 1) % this.width][(row + this.height - 1) % this.height]
+                neighbors += this.#cells[(col + this.width) % this.width][(row + this.height - 1) % this.height]
+                neighbors += this.#cells[(col + this.width + 1) % this.width][(row + this.height - 1) % this.height]
+                neighbors += this.#cells[(col + this.width - 1) % this.width][(row + this.height) % this.height]
+                neighbors += this.#cells[(col + this.width + 1) % this.width][(row + this.height) % this.height]
+                neighbors += this.#cells[(col + this.width - 1) % this.width][(row + this.height + 1) % this.height]
+                neighbors += this.#cells[(col + this.width) % this.width][(row + this.height + 1) % this.height]
+                neighbors += this.#cells[(col + this.width + 1) % this.width][(row + this.height + 1) % this.height]
 
                 if (this.#cells[col][row] === CellState.Dead) {
-                    if (neighboors === 3) {
+                    if (neighbors === 3) {
                         column.push(CellState.Alive)
                     } else {
                         column.push(CellState.Dead)
                     }
                 } else {
-                    if (neighboors >= 2 && neighboors <= 3) {
+                    if (neighbors >= 2 && neighbors <= 3) {
                         column.push(CellState.Alive)
                     } else {
                         column.push(CellState.Dead)

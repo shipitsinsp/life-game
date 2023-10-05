@@ -6,13 +6,9 @@ import * as THREE from 'three'
 import * as life from "./world.js"
 
 
-const width = 10
-const height = 10
+const width = 100
+const height = 100
 const world = new life.World(width, height)
-
-world.setCellAlive(4, 5)
-world.setCellAlive(5, 5)
-world.setCellAlive(6, 5)
 
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -24,6 +20,7 @@ camera.lookAt(0, 0, 0)
 
 const scene = new THREE.Scene()
 
+fillRandom()
 animate()
 
 function drawGrid(cells) {
@@ -47,12 +44,23 @@ function animate() {
     //requestAnimationFrame( animate )
 
     setInterval(() => {
+        scene.clear()
         world.computeNext()
         render()
-    }, 1000)
+    }, 100)
 }
 
 function render() {
     drawGrid(world.getCells())
     renderer.render(scene, camera)
+}
+
+function fillRandom() {
+    for (let col = 0; col < width; col++) {
+        for (let row = 0; row < height; row++) {
+            if (Math.random() >= 0.5) {
+                world.setCellAlive(col, row)
+            }
+        }
+    }
 }
